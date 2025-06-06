@@ -15,7 +15,7 @@ class PhysicalObject:
 
         self.type_error_message: str = "One or more of the values used is not a valid number"
 
-    def compute_velocity(self, acceleration: float, time: float,
+    def compute_velocity(self, acceleration: float or None, time: float or None,
                          use_attribute: bool, set_velocity_to_object: bool) -> float or None:
         """For computing the velocity of the object using provided
         parameters, in the form of acceleration and time."""
@@ -44,7 +44,7 @@ class PhysicalObject:
             print(self.type_error_message)
             return None
 
-    def compute_height(self, acceleration: float, time: float,
+    def compute_height(self, acceleration: float or None, time: float or None,
                        use_attribute: bool, set_to_attribute: bool):
         """For computing the height of the object using provided
         parameters, in the form of acceleration and time."""
@@ -66,7 +66,7 @@ class PhysicalObject:
         except TypeError:
             print(self.type_error_message)
 
-    def compute_time(self, height: float, acceleration: float,
+    def compute_time(self, height: float or None, acceleration: float or None,
                      use_attribute: bool, set_to_attribute: bool):
         """For computing the time of the object using provided
         parameters, in the form of height and acceleration."""
