@@ -63,11 +63,14 @@ class PhysicalObject:
                 if set_to_attribute is True:
                     self.height = computed_result
 
+            return computed_result
+
         except TypeError:
             print(self.type_error_message)
+            return None
 
     def compute_time(self, height: float or None, acceleration: float or None,
-                     use_attribute: bool, set_to_attribute: bool):
+                     use_attribute: bool, set_to_attribute: bool) -> float or None:
         """For computing the time of the object using provided
         parameters, in the form of height and acceleration."""
 
