@@ -8,10 +8,10 @@ class PhysicalObject:
 
         """For initializing private fields of the 
         object that serve as attributes"""
-        self.acceleration = acceleration
-        self.time = time
-        self.velocity = velocity
-        self.height = height
+        self.acceleration: float or None = acceleration
+        self.time: float or None = time
+        self.velocity: float or None = velocity
+        self.height: float or None = height
 
         self.type_error_message: str = "Error: One or more of the values used is not a valid number"
 
@@ -21,47 +21,64 @@ class PhysicalObject:
         parameters, in the form of acceleration and time."""
 
         try:
+            """Attempt to compute the velocity of the object"""
 
-            computed_results = None
+            computed_results: None = None # initialize the variable to be returned as null
 
             if use_attribute is True:
-                self.velocity = self.acceleration * self.time
-                computed_results = self.velocity
+                """For checking if the values to be used
+                in the computation are attribute values of
+                the object itself. If not, non-attribute values
+                can be used if the attribute values are null. """
+                velocity: float = self.acceleration * self.time # compute velocity using attribute values
+                computed_results: float = velocity # store the velocity as the computed result
 
-                if set_velocity_to_object is True:
-                    self.velocity = computed_results
+                if set_velocity_to_object is True: # will only work if it should be stored as attribute
+                    """For checking if the computed results should be stored
+                     as the velocity of the object. If so, the object's velocity 
+                     will be set to the computed results. (as an attribute)"""
+                    self.velocity: float = computed_results # store in object's private field for velocity
 
-            elif use_attribute is False:
-                computed_results = acceleration * time
+            elif use_attribute is False: # will only work if non-attribute values are to be used in computing
+                """For checking if the computed results should be
+                calculated using non-attribute values"""
+                computed_results: float = acceleration * time # stored as computed result
 
-                if set_velocity_to_object is True:
-                    self.velocity = computed_results
+                if set_velocity_to_object is True: # will only work if it should be stored as attribute
+                    """Checks if the computed result is to be stored
+                    in the private field of the object. """
+                    self.velocity: float = computed_results # store computed results in object attribute
 
-            return computed_results
+            return computed_results # return the value of the velocity computed
 
-        except TypeError:
+        except TypeError: # if a non-number is used in computing
 
-            print(self.type_error_message)
+            print(self.type_error_message) # print error message found in the __init__ method
             return None
 
     def compute_height(self, acceleration: float or None, time: float or None,
-                       use_attribute: bool, set_to_attribute: bool):
+                       use_attribute: bool, set_to_attribute: bool) -> float or None:
         """For computing the height of the object using provided
         parameters, in the form of acceleration and time."""
 
         try:
+            """Attempt to compute the height of the object"""
 
-            computed_result = None
+            computed_result: None = None # initialize as the variable to be returned
 
-            if use_attribute is True:
-                self.height = (self.acceleration * (self.time ** 2)) / 2
-                computed_result = self.height
+            if use_attribute is True: # will run if attributes are to be used in calculating
+                """For checking if the values to be used
+                in the computation are attribute values of
+                the object itself. If not, non-attribute values
+                can be used if the attribute values are null. """
+                computed_result: float = (self.acceleration * (self.time ** 2)) / 2 # store as computed result
 
             elif use_attribute is False:
-                computed_result = (acceleration * (time **2)) / 2
+                """For checking if the computed results should be calculated using non-attribute values"""
+                computed_result: float = (acceleration * (time **2)) / 2 # store as computed result
 
-                if set_to_attribute is True:
-                    self.height = computed_result
+                if set_to_attribute is True: # check if computed result should be stored as object's height
+                    self.height: float = computed_result # store as object height
 
             return computed_result
 
@@ -74,29 +91,35 @@ class PhysicalObject:
         """For computing the time of the object using provided
         parameters, in the form of height and acceleration."""
 
-        try:
+        try: # attempt to get time
 
-            computed_result = None
+            computed_result = None # initialize as result to be returned
 
             if use_attribute is True:
-                self.time = ((2 * self.height) / self.acceleration) ** 0.5
-                computed_result = self.time
+                """For checking if the values to be used
+                in the computation are attribute values of
+                the object itself. If not, non-attribute values
+                can be used if the attribute values are null. """
+                computed_result = ((2 * self.height) / self.acceleration) ** 0.5 # store as computed result
 
                 if set_to_attribute is True:
-                    self.time = computed_result
+                    """Checks if the computed result is to be stored in the private field of the object. """
+                    self.time = computed_result # store as object time
 
             elif use_attribute is False:
-                computed_result = ((2 * height) / acceleration) ** 0.5
+                """Checks if the values to be used in the computation
+                are not attribute values of the object."""
+                computed_result = ((2 * height) / acceleration) ** 0.5 # store as computed results
 
-                if set_to_attribute is True:
-                    self.time = computed_result
+                if set_to_attribute is True: # checks if computed result is to be stored as the object's time
+                    self.time = computed_result # store as object time
 
             return computed_result
 
-        except TypeError:
-            print(self.type_error_message)
+        except TypeError: # if a non-number is used in computing
+            print(self.type_error_message) # display error message found in the __init__ method
             return None
 
-        except ZeroDivisionError:
+        except ZeroDivisionError: # if the acceleration is zero
             print("Error: Acceleration cannot be zero")
             return None
