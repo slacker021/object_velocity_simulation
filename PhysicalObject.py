@@ -13,7 +13,7 @@ class PhysicalObject:
         self.velocity = velocity
         self.height = height
 
-        self.type_error_message: str = "One or more of the values used is not a valid number"
+        self.type_error_message: str = "Error: One or more of the values used is not a valid number"
 
     def compute_velocity(self, acceleration: float or None, time: float or None,
                          use_attribute: bool, set_velocity_to_object: bool) -> float or None:
